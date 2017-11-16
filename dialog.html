@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style>
+        .container {
+            max-width: 600px;
+            padding: 150px 0;
+            position: relative;
+        }
+
+        .btn1 {
+            background-color: transparent;
+            border: 1px solid #888;
+            border-radius: 5px;
+            margin: 5px;
+            font-weight: 600;
+            position: absolute;
+            top: 0;
+            outline: none;
+        }
+
+        .dialog {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 2px;
+            box-shadow: 0 0 1px #ddd;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            display: none;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 14px;
+        }
+
+        span:hover {
+            cursor: pointer;
+        }
+
+        main {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        footer {
+            direction: rtl;
+            padding: 10px;
+        }
+
+        footer button {
+            border: none;
+            background-color: transparent;
+            padding: 0 2px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .active1 {
+            display: block;
+        }
+
+        .active2 {
+            background-color: #aaa;
+        }
+
+        .active3 {
+            background-color: #428bca;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button class='btn1'>点我1</button>
+        <div class="dialog">
+            <header>
+                <h3>我是标题1</h3>
+                <span>X
+                    <span>
+            </header>
+            <main>
+                <p>我是内容1</p>
+                <p>我是内容2</p>
+            </main>
+            <footer>
+                <button class="confirm">确认</button>
+                <button class="cancel">取消</button>
+            </footer>
+        </div>
+    </div>
+    <script>
+        function $(selector) {
+            return document.querySelector(selector);
+        }
+        var btn1 = $('.btn1')
+        var dialog = $('.dialog')
+        var container = $('.container')
+        var cross = $('span')
+        var cancel = $('.cancel')
+        btn1.onmousedown = () => {
+            btn1.classList.add('active3')
+        }
+        btn1.onmouseup = () => {
+            btn1.classList.remove('active3')
+        }
+        function add() {
+            dialog.classList.add('active1');
+            container.classList.add('active2');
+            btn1.setAttribute('disabled', 'true')
+        }
+        function remove() {
+            dialog.classList.remove('active1');
+            container.classList.remove('active2');
+            btn1.removeAttribute('disabled')
+        }
+        btn1.onclick = add
+        cross.onclick = remove
+        cancel.onclick = remove
+        container.onclick = (e) => {
+            if (e.target.tagName === 'DIV') remove()
+        }
+    </script>
+</body>
+
+</html>
